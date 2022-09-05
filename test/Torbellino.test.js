@@ -3,6 +3,7 @@ const { expect } = require("chai");
 describe("Torbellino Contract", () => {
 
   let torbellino; 
+  let memo;
 
   before(async () => {
     const Torbellino = await ethers.getContractFactory("Torbellino");
@@ -10,7 +11,7 @@ describe("Torbellino Contract", () => {
     await torbellino.deployed();
   });
 
-  it("Torbellino Initial Balance", async () => {
+  it("Total Initial Balance is 0", async () => {
     const totalBalance = await torbellino.getTotalBalance();
     expect(totalBalance).to.be.equal(0);
   });

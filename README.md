@@ -16,4 +16,6 @@ npx hardhat
 npx hardhat compile
 npx hardhat test
 npx hardhat run .\scripts\deploy.js --network rinkeby
+
+npx hardhat flatten > Flattened.sol
 ```

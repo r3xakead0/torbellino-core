@@ -3,8 +3,8 @@ const deploy = async () => {
 
   console.log("Deploying contract with the account:", deployer.address);
 
-  const PlatziPunks = await ethers.getContractFactory("Torbellino");
-  const deployed = await PlatziPunks.deploy();
+  const Torbellino = await ethers.getContractFactory("Torbellino");
+  const deployed = await Torbellino.deploy();
 
   console.log("Torbellino is deployed at:", deployed.address);
 };
