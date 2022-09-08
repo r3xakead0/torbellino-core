@@ -21,7 +21,7 @@ contract Torbellino {
     function withdraw(address payable _to, string memory _order) public {
         require(msg.sender != _to, "You can't send money to yourself!");
 
-        uint amount = getMemoBalance(_order);
+        uint amount = getOrderBalance(_order);
  
         (bool success, ) = _to.call{value: amount, gas: 35000}("");
         require(success, "Failed Withdrawal");
