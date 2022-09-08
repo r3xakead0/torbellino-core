@@ -26,6 +26,8 @@ contract Torbellino {
  
         (bool success, ) = _to.call{value: amount, gas: 35000}("");
         require(success, "Failed Withdrawal");
+        
+        ordenBook[_memo] = 0;
 
         emit Withdraw(_to, amount, block.timestamp);
     }
