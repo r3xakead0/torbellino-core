@@ -12,20 +12,20 @@ contract Torbellino {
     constructor() payable {
     }
 
-    function setDeposit(string memory _memo) public payable {
+    function deposit(string memory _memo) public payable {
         require(ordenBook[_memo] == 0, "Memo is not valid");
         ordenBook[_memo] = msg.value;
 
         emit Deposit(msg.sender, msg.value, block.timestamp);
     }
 
-    function setWithdraw(address payable _to, string memory _memo) public {
-        require(ordenBook[_memo] > 0, "Memo doesn't exists");
- 
-        uint amount = ordenBook[_memo];
-        (bool success, ) = _to.call{value: amount}("");
+    function withdraw(address payable _to, string memory _memo) public {
+        require(msg.sender != _to, "You can't send money to yourself!");
 
-        require(success, "Failed Withdraw");
+        uint amount = getMemoBalance(_memo);
+ 
+        (bool success, ) = _to.call{value: amount, gas: 35000}("");
+        require(success, "Failed Withdrawal");
 
         emit Withdraw(_to, amount, block.timestamp);
     }
@@ -38,5 +38,4 @@ contract Torbellino {
         require(ordenBook[_memo] > 0, "Memo doesn't exists");
         return ordenBook[_memo];
     }
-
 }
